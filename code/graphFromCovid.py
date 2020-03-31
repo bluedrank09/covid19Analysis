@@ -55,11 +55,25 @@ try:
             for numDeathsCases in deathsYAxisString:
                 deathsYAxisInt.append(int(numDeathsCases))
 
+    #showing the number of new cases per day
+    dailyNewCasesYAxis = []
+    totalNumberOfCases = len(confirmedYInt)
+    for index in range (0, totalNumberOfCases):
+        if index == 0:
+            dailyNewCasesYAxis.append(confirmedYInt[index])
+        else:
+            todayNewCases = confirmedYInt[index] - confirmedYInt[index-1]
+            dailyNewCasesYAxis.append(todayNewCases)
+
+            
 
 
+
+    #plotting the actual graph
     plt.plot(xAxis,confirmedYInt, color = 'green', label = "Confirmed")
     plt.plot(xAxis,recoveryYAxisInt, color='purple' ,label = "Recovered")
     plt.plot(xAxis,deathsYAxisInt, color = 'red', label = "Deaths")
+    plt.plot(xAxis,dailyNewCasesYAxis, color = 'blue', label = 'New cases per day')
     plt.legend(loc="upper left")
     plt.xlabel('Date')
     plt.ylabel('Number of Cases')
